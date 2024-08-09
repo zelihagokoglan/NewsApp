@@ -2,10 +2,12 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import OnBoardingScreen from './screens/OnBoardingScreen';
-import DrawerNavigator from './DrawerNavigator';
+import TabNavigator from './TabNavigator';
+import NewsDetailScreen from './screens/NewsDetailScreen'; // Eksik bileşeni ekleyin
+
 const Stack = createStackNavigator();
 
-export default function AppNavigator() {
+const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnBoardingScreen">
@@ -15,11 +17,18 @@ export default function AppNavigator() {
           options={{ headerShown: false }} 
         />
         <Stack.Screen 
-          name="DrawerNavigator" 
-          component={DrawerNavigator} 
+          name="TabNavigator" 
+          component={TabNavigator} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="NewsDetailScreen" 
+          component={NewsDetailScreen} // Bileşeni ekleyin
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default AppNavigator;

@@ -1,25 +1,33 @@
 import React from 'react';
-import { Image } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
+import LottieView from 'lottie-react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 const OnBoardingScreen = ({ navigation }) => {
+  const Done = ({ ...props }) => (
+    <TouchableOpacity style={{ marginHorizontal: 10 }} {...props}>
+      <Text style={{ fontSize: 16 }}>Done</Text>
+    </TouchableOpacity>
+  );
   return (
     <Onboarding
-      onSkip={() => navigation.replace("DrawerNavigator")}
-      onDone={() => navigation.replace("DrawerNavigator")}
+      onDone={() => navigation.replace("TabNavigator")}
+      DoneButtonComponent={Done}
       pages={[
         {
           backgroundColor: '#fff',
-          image: <Image source={require('../../assets/favicon.png')} />,
-          title: 'Welcome',
-          subtitle: 'Your guide to an amazing experience',
+          image: (
+            <LottieView
+              source={require('../../assets/newspaper.json')}
+              autoPlay
+              loop
+              style={{ width: 300, height: 300 }}
+            />
+          ),
+          title:"Welcome..",
+          subtitle: "Discover stories that shape your world.",
         },
-        {
-          backgroundColor: '#999',
-          image: <Image source={require('../../assets/splash.png')} />,
-          title: 'Stay Connected',
-          subtitle: 'Stay connected with your friends and family.',
-        },
+        
       ]}
     />
   );
