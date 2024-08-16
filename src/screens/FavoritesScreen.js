@@ -1,5 +1,4 @@
 
-// included top news
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import CardComponent from '../components/CardComponent';
@@ -22,11 +21,7 @@ const FavoritesScreen = ({ navigation }) => {
       title: 'My Card Title 3',
       imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
     },
-    {
-      id: '4',
-      title: 'My Card Title 4',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
+    
   ];
 
   // CardComponent için renderItem fonksiyonu
@@ -38,7 +33,7 @@ const FavoritesScreen = ({ navigation }) => {
     />
   );
 
-  // Ayırıcı bileşen
+
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
   return (

@@ -1,58 +1,94 @@
-
-// included top news
-import React from 'react';
-import { View, FlatList } from 'react-native';
+import React, { useState, useLayoutEffect } from 'react';
+import { View, FlatList, TextInput, ActivityIndicator, Text } from 'react-native';
 import CardComponent from '../components/CardComponent';
 import globalStyles from '../styles/globalStyles';
+import ButtonComponent from '../components/ButtonComponent';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import useResult from '../../hooks/useResults';
+import colors from '../styles/colors';
 
 const HomeScreen = ({ navigation }) => {
-  const newsData = [
-    {
-      id: '1',
-      title: 'My Card Title 1',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    {
-      id: '2',
-      title: 'My Card Title 2',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    {
-      id: '3',
-      title: 'My Card Title 3',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    {
-      id: '4',
-      title: 'My Card Title 4',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-  ];
 
-  // CardComponent için renderItem fonksiyonu
+  const categories = ['Top', 'Crime', 'Technology', 'Politics', 'Sports'];
+  const [searchText, setSearchText] = useState('');
+  const [activeCategory, setActiveCategory] = useState('Top');
+  const { newsData, loading, error } = useResult(activeCategory);
+  filteredNewsData = newsData.filter(item => 
+    item.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   const renderItem = ({ item }) => (
     <CardComponent
-      imageUrl={item.imageUrl}
+      imageUrl={item.image_url} 
       title={item.title}
-      onPress={() => navigation.navigate('NewsDetailScreen', { id: item.id })}
+      onPress={() => navigation.navigate('NewsDetailScreen', { 
+        title: item.title,
+        image: item.image_url, 
+        description: item.description, 
+        pubDate: item.pubDate, 
+        source_name: item.source_name 
+      })}
+    />
+  );
+  
+  const renderCategoryItem = ({ item }) => (
+    <ButtonComponent 
+      category={item} 
+      isActive={item === activeCategory} 
+      onPress={() => setActiveCategory(item)} 
     />
   );
 
-  // Ayırıcı bileşen
   const ItemSeparator = () => <View style={globalStyles.separator} />;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: activeCategory, 
+    });
+  }, [navigation, activeCategory]);
 
   return (
     <View style={globalStyles.container}>
+      <View style={globalStyles.searchContainer}>
+        <TextInput
+          style={globalStyles.searchInput}
+          placeholder="Search news..."
+          value={searchText}
+          onChangeText={(text) => setSearchText(text)}
+          autoCorrect={false}
+          autoCapitalize='none'
+        />
+        <EvilIcons name="search" size={24} color="gray" style={globalStyles.searchIcon} />
+      </View>
+
       <FlatList
-        data={newsData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        ItemSeparatorComponent={ItemSeparator} // Ayırıcı bileşen
-        contentContainerStyle={globalStyles.listContent}
+        data={categories}
+        renderItem={renderCategoryItem}
+        keyExtractor={item => item}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          ...globalStyles.listContent,
+          marginBottom: 15,
+        }}
       />
+
+      {loading ? (
+        <ActivityIndicator size="large" colors={colors.secondary} />
+      ) : error ? (
+        <Text>Error fetching news: {error.message}</Text>
+      ) : (
+        <FlatList
+          data={filteredNewsData}
+          renderItem={renderItem}
+          keyExtractor={item => item.id || item.title} 
+          ItemSeparatorComponent={ItemSeparator}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={globalStyles.listContent}
+        />
+      )}
     </View>
   );
 };
-
 
 export default HomeScreen;

@@ -4,30 +4,39 @@ import HomeScreen from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import colors from './styles/colors';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen 
-        name="Favorites" 
-        component={FavoritesScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="favorite-border" size={size} color={color} />
-          ),
-        }}
-      />
+    <Tab.Navigator
+      initialRouteName="Top"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === 'Top') {
+            iconName = 'home';
+            return <AntDesign name={iconName} size={size} color={color} />;
+          } else if (route.name === 'Favorites') {
+            iconName = 'favorite-border';
+            return <MaterialIcons name={iconName} size={size} color={color} />;
+          }
+        },
+        tabBarActiveTintColor: colors.secondary, 
+        tabBarInactiveTintColor: 'gray', 
+        tabBarStyle: {
+          backgroundColor: colors.background, 
+          borderTopWidth: 1, 
+          borderTopColor: '#ddd', 
+        },
+        headerShown: true, 
+      })}
+    >
+      <Tab.Screen name="Top" component={HomeScreen} />
+      <Tab.Screen name="Favorites" component={FavoritesScreen} />
+      
     </Tab.Navigator>
   );
 };

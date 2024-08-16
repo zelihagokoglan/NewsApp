@@ -2,20 +2,23 @@ import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import LottieView from 'lottie-react-native';
 import { Text, TouchableOpacity } from 'react-native';
+import colors from '../styles/colors';
+
 
 const OnBoardingScreen = ({ navigation }) => {
   const Done = ({ ...props }) => (
     <TouchableOpacity style={{ marginHorizontal: 10 }} {...props}>
-      <Text style={{ fontSize: 16 }}>Done</Text>
+      <Text>Done</Text>
     </TouchableOpacity>
   );
   return (
     <Onboarding
       onDone={() => navigation.replace("TabNavigator")}
+
       DoneButtonComponent={Done}
       pages={[
         {
-          backgroundColor: '#fff',
+          backgroundColor: colors.background,
           image: (
             <LottieView
               source={require('../../assets/newspaper.json')}
@@ -27,6 +30,7 @@ const OnBoardingScreen = ({ navigation }) => {
           title:"Welcome..",
           subtitle: "Discover stories that shape your world.",
         },
+      
         
       ]}
     />

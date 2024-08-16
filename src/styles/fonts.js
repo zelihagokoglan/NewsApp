@@ -13,13 +13,11 @@ const fonts = StyleSheet.create({
   },
   detail: {
     fontSize:16,
-    fontFamily:'Poppins',
-  },
-  drawerText:{
-    fontSize:13,
-    fontFamily:'Poppins',
+    fontFamily:'Roboto-Mono',
+    fontWeight:'bold',
 
   },
+  
 });
 
 export default fonts;
