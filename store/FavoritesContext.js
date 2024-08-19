@@ -6,21 +6,21 @@ export const FavoritesContext = createContext({
   removeFavorite: (id) => {},
 });
 
-export function FavoritesContextProvider({ children }) {
-  const [favoriteIds, setFavoriteIds] = useState([]);
+function FavoritesContextProvider({ children }) {
+  const [favoriteNewsIds, setFavoriteNewsIds] = useState([]);
 
   function addFavorite(id) {
-    setFavoriteIds((currentFavorites) => [...currentFavorites, id]);
+    setFavoriteNewsIds((currentFavIds) => [...currentFavIds, id]);
   }
 
   function removeFavorite(id) {
-    setFavoriteIds((currentFavorites) =>
-      currentFavorites.filter((favoriteId) => favoriteId !== id)
+    setFavoriteNewsIds((currentFavIds) =>
+      currentFavIds.filter((newsId) => newsId !== id)
     );
   }
 
   const value = {
-    ids: favoriteIds,
+    ids: favoriteNewsIds,
     addFavorite: addFavorite,
     removeFavorite: removeFavorite,
   };
@@ -31,3 +31,5 @@ export function FavoritesContextProvider({ children }) {
     </FavoritesContext.Provider>
   );
 }
+
+export default FavoritesContextProvider;

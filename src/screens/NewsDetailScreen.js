@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useContext, useCallback } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import { View, Text, ImageBackground, ScrollView, Pressable } from 'react-native';
 import { Card } from 'react-native-elements';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -9,22 +9,25 @@ import { FavoritesContext } from '../../store/FavoritesContext';
 export default function NewsDetailScreen({ route, navigation }) {
   const favoriteNewsContext = useContext(FavoritesContext);
   const { title, image, description, pubDate, source_name } = route.params;
-  const article_id = route.params.article_id;
+  const article_id = route.params;
 
   const newsIsFavorite = favoriteNewsContext.ids.includes(article_id);
 
-  const changeFavorite = useCallback(() => {
+  function changeFavorite (){
     if (newsIsFavorite) {
       favoriteNewsContext.removeFavorite(article_id);
     } else {
       favoriteNewsContext.addFavorite(article_id);
     }
-  }, [newsIsFavorite, favoriteNewsContext, article_id]);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Pressable onPress={changeFavorite}>
+        <Pressable 
+        onPress={changeFavorite}
+        style={{ marginRight: 10 }}
+        >
           <MaterialIcons
             style={({ pressed }) => (pressed ? globalStyles.pressed : null)}
             name={newsIsFavorite ? "favorite" : "favorite-border"}
