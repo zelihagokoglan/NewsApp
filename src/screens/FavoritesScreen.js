@@ -1,53 +1,36 @@
-
-import React from 'react';
-import { View, FlatList } from 'react-native';
-import CardComponent from '../components/CardComponent';
+import React, { useContext } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import { FavoritesContext } from '../../store/FavoritesContext';
 import globalStyles from '../styles/globalStyles';
+import CardComponent from '../components/CardComponent';
 
-const FavoritesScreen = ({ navigation }) => {
-  const newsData = [
-    {
-      id: '1',
-      title: 'My Card Title 1',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    {
-      id: '2',
-      title: 'My Card Title 2',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    {
-      id: '3',
-      title: 'My Card Title 3',
-      imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2017/12/yoda-the-empire-strikes-back-28a7558.jpg?quality=90&resize=800,534',
-    },
-    
-  ];
-
-  // CardComponent için renderItem fonksiyonu
-  const renderItem = ({ item }) => (
-    <CardComponent
-      imageUrl={item.imageUrl}
-      title={item.title}
-      onPress={() => navigation.navigate('NewsDetailScreen', { id: item.id })}
-    />
-  );
-
-
+const FavoritesScreen = () => {
+  const favoriteNewsContext = useContext(FavoritesContext);
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
-  return (
-    <View style={globalStyles.container}>
-      <FlatList
-        data={newsData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        ItemSeparatorComponent={ItemSeparator} // Ayırıcı bileşen
-        contentContainerStyle={globalStyles.listContent}
-      />
-    </View>
-  );
-};
 
+  const renderItem = ({ item }) => (
+    <CardComponent
+      imageUrl={item.image_url} 
+      title={item.title}
+      onPress={() => navigation.navigate('NewsDetailScreen', { 
+        title: item.title,
+        image: item.image_url, 
+        description: item.description, 
+        pubDate: item.pubDate, 
+        source_name: item.source_name 
+      })}
+    />
+  );
+    
+    return <FlatList
+    data={favoriteNewsContext.ids}
+    renderItem={renderItem}
+    keyExtractor={item => item.id || item.title} 
+    ItemSeparatorComponent={ItemSeparator}
+    showsVerticalScrollIndicator={false}
+    contentContainerStyle={globalStyles.listContent}
+  />;
+  }
 
 export default FavoritesScreen;

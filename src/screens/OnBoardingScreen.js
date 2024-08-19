@@ -25,6 +25,7 @@ const OnBoardingScreen = ({ navigation }) => {
               autoPlay
               loop
               style={{ width: 300, height: 300 }}
+              
             />
           ),
           title:"Welcome..",
