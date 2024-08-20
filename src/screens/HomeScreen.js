@@ -16,7 +16,6 @@ const HomeScreen = ({ navigation }) => {
   filteredNewsData = newsData.filter(item => 
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
-
   const renderItem = ({ item }) => (
     <CardComponent
       imageUrl={item.image_url} 
@@ -26,10 +25,12 @@ const HomeScreen = ({ navigation }) => {
         image: item.image_url, 
         description: item.description, 
         pubDate: item.pubDate, 
-        source_name: item.source_name 
+        source_name: item.source_name,
+        article_id: item.article_id // Burada article_id'yi ekliyoruz
       })}
     />
   );
+  
   
   const renderCategoryItem = ({ item }) => (
     <ButtonComponent 
