@@ -5,7 +5,6 @@ const deviceWidth = Math.round(Dimensions.get('window').width);
 const deviceHeight = Math.round(Dimensions.get('window').height);
 const cardWidth = deviceWidth - 70;
 
-// Container ve Layout Stilleri
 const layoutStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,7 +43,6 @@ const layoutStyles = StyleSheet.create({
   },
 });
 
-// Text Stillleri
 const textStyles = StyleSheet.create({
   descriptionText: {
     fontSize: 16,
@@ -88,7 +86,6 @@ const textStyles = StyleSheet.create({
   },
 });
 
-// Buton ve Etkileşim Stillleri
 const buttonStyles = StyleSheet.create({
   button: {
     backgroundColor: colors.secondary,
@@ -112,7 +109,6 @@ const buttonStyles = StyleSheet.create({
   },
 });
 
-// Kart ve Resim Stilleri
 const cardStyles = StyleSheet.create({
   cardContainer: {
     width: cardWidth,
@@ -139,7 +135,6 @@ const cardStyles = StyleSheet.create({
   },
 });
 
-// Onboarding Stillleri
 const onboardingStyles = StyleSheet.create({
   onBiMage: {
     width: deviceWidth,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import globalStyles from '../styles/globalStyles';
 
@@ -13,7 +13,7 @@ const OnboardingScreen = ({ navigation }) => {
           backgroundColor: '#fff',
           image: (
             <Image
-              source={require('../../assets/onbPage1.jpg')} // Kendi resim dosyanızı kullanın
+              source={require('../../assets/onbPage1.jpg')} 
               style={globalStyles.onBiMage}
             />
           ),
@@ -30,7 +30,7 @@ const OnboardingScreen = ({ navigation }) => {
           backgroundColor: '#fff',
           image: (
             <Image
-              source={require('../../assets/onbPage2.jpg')} // Kendi resim dosyanızı kullanın
+              source={require('../../assets/onbPage2.jpg')} 
               style={globalStyles.onBiMage}
             />
           ),
