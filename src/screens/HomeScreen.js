@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
         description: item.description, 
         pubDate: item.pubDate, 
         source_name: item.source_name,
-        article_id: item.article_id // Burada article_id'yi ekliyoruz
+        article_id: item.article_id 
       })}
     />
   );
@@ -59,7 +59,7 @@ const HomeScreen = ({ navigation }) => {
           autoCorrect={false}
           autoCapitalize='none'
         />
-        <EvilIcons name="search" size={24} color="gray" style={globalStyles.searchIcon} />
+        <EvilIcons name="search" size={24} color={colors.avgGray} style={globalStyles.searchIcon} />
       </View>
 
       <FlatList
@@ -75,7 +75,7 @@ const HomeScreen = ({ navigation }) => {
       />
 
       {loading ? (
-        <ActivityIndicator size="large" colors={colors.secondary} />
+        <ActivityIndicator size="large" colors={colors.black} />
       ) : error ? (
         <Text>Error fetching news: {error.message}</Text>
       ) : (

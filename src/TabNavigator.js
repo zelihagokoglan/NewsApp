@@ -24,10 +24,10 @@ const TabNavigator = () => {
             return <MaterialIcons name={iconName} size={size} color={color} />;
           }
         },
-        tabBarActiveTintColor: colors.secondary, 
-        tabBarInactiveTintColor: 'gray', 
+        tabBarActiveTintColor: colors.black, 
+        tabBarInactiveTintColor: colors.border, 
         tabBarStyle: {
-          backgroundColor: colors.background, 
+          backgroundColor: colors.white, 
           borderTopWidth: 1, 
           borderTopColor: '#ddd', 
         },

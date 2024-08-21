@@ -8,18 +8,18 @@ const ButtonComponent = ({ category, onPress, isActive }) => {
   return (
     <TouchableOpacity onPress={onPress} style={{ marginHorizontal: 5 }}>
       <LinearGradient
-        colors={isActive ? ['#fff', '#fff'] : [colors.secondary, colors.background]}
+        colors={isActive ? [colors.avgGray, colors.avgGray] : [colors.black, colors.black]}
         start={{ x: 0, y: 0 }}  
         end={{ x: 1, y: 1 }}
         style={[
           globalStyles.button,
-          { borderColor: isActive ? colors.secondary : colors.primary },
+          { borderColor: isActive ? colors.black : colors.black },
         ]}
       >
         <Text
           style={[
             globalStyles.buttonText,
-            { color: isActive ? colors.primary : '#fff' },
+            { color: isActive ? colors.black : colors.white },
           ]}
         >
           {category}

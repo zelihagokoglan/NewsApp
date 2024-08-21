@@ -11,7 +11,7 @@ const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: colors.background,
+    backgroundColor: colors.white,
   },
   listContent: {
     paddingVertical: 30,
@@ -29,11 +29,11 @@ const layoutStyles = StyleSheet.create({
   searchInput: {
     flex: 1,
     height: 40,
-    borderColor: '#ccc',
+    borderColor: colors.avgGray,
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    color: '#000',
+    color: colors.black,
   },
   searchIcon: {
     marginLeft: 10,
@@ -46,14 +46,14 @@ const layoutStyles = StyleSheet.create({
 const textStyles = StyleSheet.create({
   descriptionText: {
     fontSize: 16,
-    color: colors.primary,
+    color: colors.black,
     paddingHorizontal: 22,
     alignSelf: 'center',
     textAlign: 'left',
   },
   sourceTimeText: {
     fontSize: 12,
-    color: colors.primary,
+    color: colors.black,
     fontWeight: 'bold',
     alignSelf: 'center',
     textAlign: 'left',
@@ -62,7 +62,7 @@ const textStyles = StyleSheet.create({
   },
   detailTitleText: {
     fontSize: 18,
-    color: colors.primary,
+    color: colors.black,
     fontWeight: 'bold',
     alignSelf: 'center',
     textAlign: 'center',
@@ -71,28 +71,28 @@ const textStyles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 18,
-    color: '#fff',
+    color: colors.white,
     padding: 10,
   },
   cardText: {
     fontSize: 12,
-    color: '#fff',
+    color: colors.white,
     marginBottom: 20,
   },
   onBtext: {
     fontSize: 16,
-    color: colors.primary,
+    color: colors.black,
     textAlign: 'center',
   },
 });
 
 const buttonStyles = StyleSheet.create({
   button: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.black,
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: colors.primary,
+    borderColor: colors.black,
     marginHorizontal: 10,
     width: 100,
     height: 40,
@@ -103,7 +103,7 @@ const buttonStyles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: colors.primary,
+    color: colors.black,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -144,7 +144,7 @@ const onboardingStyles = StyleSheet.create({
     width: deviceWidth,
     paddingHorizontal: 20,
     marginBottom: 200,
-    backgroundColor: colors.background,
+    backgroundColor: colors.white,
   },
 });
 

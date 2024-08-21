@@ -1,12 +1,14 @@
 // src/styles/colors.js
 import { StyleSheet } from 'react-native';
 const colors =StyleSheet.create({
-    primary: '#000000', // siyah
-    secondary: '#c90076', // mor
-    items: '#ead1dc', // açık mor
-    background: '#ffffff', // beyaz
-    text: '#2c3e50', // koyu gri
-    border: '#bdc3c7', // açık gri
+    black: '#000000', // siyah
+    purple: '#c90076', // mor
+    purple1: '#ead1dc', // açık mor
+    white: '#ffffff', // beyaz
+    darkGray: '#2c3e50', // koyu gri
+    border: '#bdc3c7', // açık gri //border
+    darkGray1: '#4f5963', // koyu gri buttongrad
+    avgGray: '#dcdee0', // avg gri
     
 });
   

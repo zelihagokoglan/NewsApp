@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import globalStyles from '../styles/globalStyles';
+import { colors } from 'react-native-elements';
 
 const OnboardingScreen = ({ navigation }) => {
   return (
@@ -10,7 +11,7 @@ const OnboardingScreen = ({ navigation }) => {
       onDone={() => navigation.replace('TabNavigator')}
       pages={[
         {
-          backgroundColor: '#fff',
+          backgroundColor: colors.white,
           image: (
             <Image
               source={require('../../assets/onbPage1.jpg')} 
@@ -27,7 +28,7 @@ const OnboardingScreen = ({ navigation }) => {
           ),
         },
         {
-          backgroundColor: '#fff',
+          backgroundColor: colors.white,
           image: (
             <Image
               source={require('../../assets/onbPage2.jpg')} 
