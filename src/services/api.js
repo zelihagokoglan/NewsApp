@@ -18,7 +18,7 @@ export const fetchNews = async (categories) => {
     });
 
     const newsArray = response.data.results.map((newsItem) => new News({ // gelen nesneleri map ler
-      article_id: newsItem.id, 
+      article_id: newsItem.article_id, 
       country: newsItem.country, 
       category: newsItem.category, 
       language: newsItem.language, 
