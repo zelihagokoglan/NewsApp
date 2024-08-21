@@ -12,7 +12,6 @@ const HomeScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [activeCategory, setActiveCategory] = useState('Top');
   const { newsData, loading, error } = useResult(activeCategory);
-
   const filteredNewsData = newsData.filter(item => 
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -42,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
 
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
-  useLayoutEffect(() => {
+  useLayoutEffect(() => { // kullanıcı etkileşmli kategori değişikliği anında iletilir
     navigation.setOptions({
       title: activeCategory, 
     });

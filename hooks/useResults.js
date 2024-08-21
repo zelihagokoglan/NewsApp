@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { fetchNews } from '../src/services/api';
 
 
-
 const useResult = (category) => {
-  const [newsData, setNewsData] = useState([]);
+  const [newsData, setNewsData] = useState([]); // newsData haber verilerini tutar - setNewsData günceller
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,7 +12,7 @@ const useResult = (category) => {
       setLoading(true);
       setError(null);
       try {
-        const data = await fetchNews([category]);
+        const data = await fetchNews([category]); // kategoriye göre haber alır
         setNewsData(data);
       } catch (error) {
         setError(error);

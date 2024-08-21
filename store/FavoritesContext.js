@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+
 export const FavoritesContext = createContext({
   ids: [],
   addFavorite: (newsItem) => {},

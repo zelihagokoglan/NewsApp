@@ -6,10 +6,11 @@ import globalStyles from '../styles/globalStyles';
 import colors from '../styles/colors';
 import { FavoritesContext } from '../../store/FavoritesContext';
 
+
 export default function NewsDetailScreen({ route, navigation }) {
+
   const favoriteNewsContext = useContext(FavoritesContext);
   const { title, image, description, pubDate, source_name, article_id } = route.params;
-
   const [newsIsFavorite, setNewsIsFavorite] = useState(
     favoriteNewsContext.ids.some(news => news.article_id === article_id)
   );
@@ -17,6 +18,7 @@ export default function NewsDetailScreen({ route, navigation }) {
   useEffect(() => {
     setNewsIsFavorite(favoriteNewsContext.ids.some(news => news.article_id === article_id));
   }, [favoriteNewsContext.ids]);
+
 
   function changeFavorite() {
     if (newsIsFavorite) {
@@ -40,6 +42,7 @@ export default function NewsDetailScreen({ route, navigation }) {
       ),
     });
   }, [navigation, newsIsFavorite]);
+
 
   return (
     <ScrollView contentContainerStyle={globalStyles.scrollView}>

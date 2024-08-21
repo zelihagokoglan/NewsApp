@@ -1,4 +1,3 @@
-// src/styles/colors.js
 import { StyleSheet } from 'react-native';
 const colors =StyleSheet.create({
     black: '#000000', // siyah

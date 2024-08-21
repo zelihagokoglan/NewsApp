@@ -6,9 +6,11 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import colors from './styles/colors';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+
   return (
     <Tab.Navigator
       initialRouteName="Top"
@@ -36,7 +38,6 @@ const TabNavigator = () => {
     >
       <Tab.Screen name="Top" component={HomeScreen} />
       <Tab.Screen name="Favorites" component={FavoritesScreen} />
-      
     </Tab.Navigator>
   );
 };

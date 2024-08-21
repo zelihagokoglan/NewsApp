@@ -5,6 +5,8 @@ import OnBoardingScreen from './screens/OnBoardingScreen';
 import TabNavigator from './TabNavigator';
 import NewsDetailScreen from './screens/NewsDetailScreen'; 
 import  FavoritesContextProvider  from '../store/FavoritesContext';
+
+
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {

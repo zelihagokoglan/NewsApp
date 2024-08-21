@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import globalStyles from '../styles/globalStyles';
 import colors from '../styles/colors';
 
+
 const ButtonComponent = ({ category, onPress, isActive }) => {
   return (
     <TouchableOpacity onPress={onPress} style={{ marginHorizontal: 5 }}>

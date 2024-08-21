@@ -4,9 +4,9 @@ import { FavoritesContext } from '../../store/FavoritesContext';
 import globalStyles from '../styles/globalStyles';
 import CardComponent from '../components/CardComponent';
 
+
 const FavoritesScreen = ({ navigation }) => {
   const favoriteNewsContext = useContext(FavoritesContext);
-
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
   useEffect(() => {

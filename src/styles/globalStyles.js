@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import colors from './colors';
 
+
 const deviceWidth = Math.round(Dimensions.get('window').width);
 const deviceHeight = Math.round(Dimensions.get('window').height);
 const cardWidth = deviceWidth - 70;

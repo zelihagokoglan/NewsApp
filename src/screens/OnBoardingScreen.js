@@ -4,7 +4,9 @@ import Onboarding from 'react-native-onboarding-swiper';
 import globalStyles from '../styles/globalStyles';
 import { colors } from 'react-native-elements';
 
+
 const OnboardingScreen = ({ navigation }) => {
+  
   return (
     <Onboarding
       onSkip={() => navigation.replace('TabNavigator')}
