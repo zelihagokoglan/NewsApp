@@ -20,9 +20,9 @@ export default function NewsDetailScreen({ route, navigation }) {
 
   function changeFavorite() {
     if (newsIsFavorite) {
-      favoriteNewsContext.removeFavorite(article_id); // Doğru article_id gönderildi
+      favoriteNewsContext.removeFavorite(article_id);
     } else {
-      favoriteNewsContext.addFavorite({ title, image_url: image, article_id, description, pubDate, source_name });
+      favoriteNewsContext.addFavorite({ title, image, article_id, description, pubDate, source_name });
     }
     setNewsIsFavorite(!newsIsFavorite);
   }

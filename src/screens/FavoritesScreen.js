@@ -1,5 +1,5 @@
-import React, { useContext ,useEffect } from 'react';
-import { View, FlatList,Text} from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, FlatList, Text } from 'react-native';
 import { FavoritesContext } from '../../store/FavoritesContext';
 import globalStyles from '../styles/globalStyles';
 import CardComponent from '../components/CardComponent';
@@ -8,17 +8,18 @@ const FavoritesScreen = ({ navigation }) => {
   const favoriteNewsContext = useContext(FavoritesContext);
 
   const ItemSeparator = () => <View style={globalStyles.separator} />;
+
   useEffect(() => {
     console.log('Favorites updated', favoriteNewsContext.ids);
   }, [favoriteNewsContext.ids]);
-  
+
   const renderItem = ({ item }) => (
     <CardComponent
-      imageUrl={item.image_url} 
+      image={item.image} 
       title={item.title}
       onPress={() => navigation.navigate('NewsDetailScreen', { 
         title: item.title,
-        image: item.image_url, 
+        image: item.image, 
         description: item.description, 
         pubDate: item.pubDate, 
         source_name: item.source_name,
@@ -26,6 +27,7 @@ const FavoritesScreen = ({ navigation }) => {
       })}
     />
   );
+
   if (favoriteNewsContext.ids.length === 0) {
     return (
       <View style={globalStyles.container}>
@@ -34,12 +36,11 @@ const FavoritesScreen = ({ navigation }) => {
     );
   }
 
-
   return (
     <FlatList
       data={favoriteNewsContext.ids}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id || item.title}
+      keyExtractor={(item) => item.article_id || item.title}
       ItemSeparatorComponent={ItemSeparator}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={globalStyles.listContent}

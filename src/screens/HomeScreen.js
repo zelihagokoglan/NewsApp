@@ -8,21 +8,22 @@ import useResult from '../../hooks/useResults';
 import colors from '../styles/colors';
 
 const HomeScreen = ({ navigation }) => {
-
   const categories = ['Top', 'Crime', 'Technology', 'Politics', 'Sports'];
   const [searchText, setSearchText] = useState('');
   const [activeCategory, setActiveCategory] = useState('Top');
   const { newsData, loading, error } = useResult(activeCategory);
-  filteredNewsData = newsData.filter(item => 
+
+  const filteredNewsData = newsData.filter(item => 
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
+
   const renderItem = ({ item }) => (
     <CardComponent
-      imageUrl={item.image_url} 
+      image={item.image} 
       title={item.title}
       onPress={() => navigation.navigate('NewsDetailScreen', { 
         title: item.title,
-        image: item.image_url, 
+        image: item.image, 
         description: item.description, 
         pubDate: item.pubDate, 
         source_name: item.source_name,
@@ -30,8 +31,7 @@ const HomeScreen = ({ navigation }) => {
       })}
     />
   );
-  
-  
+
   const renderCategoryItem = ({ item }) => (
     <ButtonComponent 
       category={item} 
@@ -82,7 +82,7 @@ const HomeScreen = ({ navigation }) => {
         <FlatList
           data={filteredNewsData}
           renderItem={renderItem}
-          keyExtractor={item => item.id || item.title} 
+          keyExtractor={item => item.article_id || item.title}
           ItemSeparatorComponent={ItemSeparator}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={globalStyles.listContent}
