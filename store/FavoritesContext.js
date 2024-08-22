@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const FavoritesContext = createContext({
@@ -7,8 +8,35 @@ export const FavoritesContext = createContext({
   removeFavorite: (article_id) => {},
 });
 
-function FavoritesContextProvider({ children }) {
+function FavoritesContextProvider({ children }) { // uygulama kapatılığında favorileri asyncStorage da tutma func.
   const [favoriteNews, setFavoriteNews] = useState([]);
+
+  const saveFavoritesToStorage = async (favorites) => { // favorites(array) kaydetmek istediğimiz fav haberleri alır
+    try {
+      await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (error) {
+      console.error('Favorileri kaydederken hata oluştu ', error);
+    }
+  };
+
+  const loadFavoritesFromStorage = async () => {
+    try {
+      const storedFavorites = await AsyncStorage.getItem('favorites');
+      if (storedFavorites) {
+        setFavoriteNews(JSON.parse(storedFavorites));
+      }
+    } catch (error) {
+      console.error('Favorileri yüklerken hata oluştu ', error);
+    }
+  };
+
+  useEffect(() => {
+    loadFavoritesFromStorage();
+  }, []);
+
+  useEffect(() => {
+    saveFavoritesToStorage(favoriteNews);
+  }, [favoriteNews]);
 
   function addFavorite(newsItem) {
     setFavoriteNews((currentFavs) => [...currentFavs, newsItem]);
