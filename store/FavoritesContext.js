@@ -11,15 +11,16 @@ export const FavoritesContext = createContext({
 function FavoritesContextProvider({ children }) { // uygulama kapatılığında favorileri asyncStorage da tutma func.
   const [favoriteNews, setFavoriteNews] = useState([]);
 
-  const saveFavoritesToStorage = async (favorites) => { // favorites(array) kaydetmek istediğimiz fav haberleri alır
+  const storeData = async (favorites) => { // favorites(array) kaydetmek istediğimiz fav haberleri alır
     try {
-      await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+      const jsonValue = JSON.stringify(favorites);
+      await AsyncStorage.setItem('favorites',jsonValue);
     } catch (error) {
       console.error('Favorileri kaydederken hata oluştu ', error);
     }
   };
 
-  const loadFavoritesFromStorage = async () => {
+  const readData = async () => {
     try {
       const storedFavorites = await AsyncStorage.getItem('favorites');
       if (storedFavorites) {
@@ -31,11 +32,11 @@ function FavoritesContextProvider({ children }) { // uygulama kapatılığında 
   };
 
   useEffect(() => {
-    loadFavoritesFromStorage();
+    readData();
   }, []);
 
   useEffect(() => {
-    saveFavoritesToStorage(favoriteNews);
+    storeData(favoriteNews);
   }, [favoriteNews]);
 
   function addFavorite(newsItem) {
