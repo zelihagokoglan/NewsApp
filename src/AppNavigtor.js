@@ -5,15 +5,23 @@ import OnBoardingScreen from './screens/OnBoardingScreen';
 import TabNavigator from './TabNavigator';
 import NewsDetailScreen from './screens/NewsDetailScreen'; 
 import  FavoritesContextProvider  from '../store/FavoritesContext';
+import { ClerkProvider,ClerkLoaded } from '@clerk/clerk-expo';
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+if(!publishableKey){
+  throw new Error("Missing Publishable Key.");
+}
 
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <FavoritesContextProvider> 
-        <Stack.Navigator initialRouteName="OnBoardingScreen">
+    <ClerkProvider publishableKey='publishableKey'>
+     <ClerkLoaded>
+      <NavigationContainer>
+       <FavoritesContextProvider> 
+         <Stack.Navigator initialRouteName="OnBoardingScreen">
           <Stack.Screen 
             name="OnBoardingScreen" 
             component={OnBoardingScreen} 
@@ -30,8 +38,11 @@ const AppNavigator = () => {
             options={{ headerShown: true, title: 'Detay' }} 
           />
         </Stack.Navigator>
-      </FavoritesContextProvider>
-    </NavigationContainer>
+       </FavoritesContextProvider>
+      </NavigationContainer>
+     </ClerkLoaded>
+    </ClerkProvider>
+    
   );
 };
 
