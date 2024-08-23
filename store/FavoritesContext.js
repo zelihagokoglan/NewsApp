@@ -8,10 +8,12 @@ export const FavoritesContext = createContext({
   removeFavorite: (article_id) => {},
 });
 
-function FavoritesContextProvider({ children }) { // uygulama kapatılığında favorileri asyncStorage da tutma func.
+
+function FavoritesContextProvider({ children }) { 
   const [favoriteNews, setFavoriteNews] = useState([]);
 
-  const storeData = async (favorites) => { // favorites(array) kaydetmek istediğimiz fav haberleri alır
+  // AsyncStorage
+  const storeData = async (favorites) => { 
     try {
       const jsonValue = JSON.stringify(favorites);
       await AsyncStorage.setItem('favorites',jsonValue);

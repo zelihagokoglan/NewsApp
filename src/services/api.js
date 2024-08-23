@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { News } from '../models/newsModel';
-const API_KEY = 'pub_49809da669dd5b5613caa6380cfe3d8733535'; 
-const BASE_URL = 'https://newsdata.io/api/1/latest';
-
+import { API_KEY, BASE_URL } from '@env'; // .env dosyasından verileri içe aktarıyoruz
 
 export const fetchNews = async (categories) => {
   try {
@@ -17,8 +15,8 @@ export const fetchNews = async (categories) => {
       }
     });
 
-    const newsArray = response.data.results.map((newsItem) => new News({ // gelen nesneleri map ler
-      article_id: newsItem.article_id, 
+    const newsArray = response.data.results.map((newsItem) => new News({
+      article_id: newsItem.article_id,
       country: newsItem.country, 
       category: newsItem.category, 
       language: newsItem.language, 

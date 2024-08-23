@@ -1,17 +1,23 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { View, FlatList, TextInput, ActivityIndicator, Text } from 'react-native';
-import CardComponent from '../components/CardComponent';
+import CardComponent from '../components/card';
 import globalStyles from '../styles/globalStyles';
-import ButtonComponent from '../components/ButtonComponent';
+import ButtonComponent from '../components/button';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import useResult from '../../hooks/useResults';
 import colors from '../styles/colors';
 
+const categories = ['Top', 'Crime', 'Technology', 'Politics', 'Sports'];
+
 const HomeScreen = ({ navigation }) => {
-  const categories = ['Top', 'Crime', 'Technology', 'Politics', 'Sports'];
+  // States
   const [searchText, setSearchText] = useState('');
   const [activeCategory, setActiveCategory] = useState('Top');
+
+  // Hooks
   const { newsData, loading, error } = useResult(activeCategory);
+
+  // Constants
   const filteredNewsData = newsData.filter(item => 
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -41,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
 
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
-  useLayoutEffect(() => { // kullanıcı etkileşmli kategori değişikliği anında iletilir
+  useLayoutEffect(() => { 
     navigation.setOptions({
       title: activeCategory, 
     });

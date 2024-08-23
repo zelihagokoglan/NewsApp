@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { FavoritesContext } from '../../store/FavoritesContext';
 import globalStyles from '../styles/globalStyles';
-import CardComponent from '../components/CardComponent';
-
+import CardComponent from '../components/card';
 
 const FavoritesScreen = ({ navigation }) => {
   const favoriteNewsContext = useContext(FavoritesContext);
