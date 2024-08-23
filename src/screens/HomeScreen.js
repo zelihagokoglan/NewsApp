@@ -1,55 +1,63 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { View, FlatList, TextInput, ActivityIndicator, Text } from 'react-native';
-import CardComponent from '../components/card';
-import globalStyles from '../styles/globalStyles';
-import ButtonComponent from '../components/button';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
-import useResult from '../../hooks/useResults';
-import colors from '../styles/colors';
+import React, { useState, useLayoutEffect } from "react";
+import {
+  View,
+  FlatList,
+  TextInput,
+  ActivityIndicator,
+  Text,
+} from "react-native";
+import CardComponent from "../components/card";
+import globalStyles from "../styles/globalStyles";
+import ButtonComponent from "../components/button";
+import EvilIcons from "@expo/vector-icons/EvilIcons";
+import useResult from "../../hooks/useResults";
+import colors from "../styles/colors";
 
-const categories = ['Top', 'Crime', 'Technology', 'Politics', 'Sports'];
+const categories = ["Top", "Crime", "Technology", "Politics", "Sports"];
 
 const HomeScreen = ({ navigation }) => {
   // States
-  const [searchText, setSearchText] = useState('');
-  const [activeCategory, setActiveCategory] = useState('Top');
+  const [searchText, setSearchText] = useState("");
+  const [activeCategory, setActiveCategory] = useState("Top");
 
   // Hooks
   const { newsData, loading, error } = useResult(activeCategory);
 
   // Constants
-  const filteredNewsData = newsData.filter(item => 
+  const filteredNewsData = newsData.filter((item) =>
     item.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const renderItem = ({ item }) => (
     <CardComponent
-      image={item.image} 
+      image={item.image}
       title={item.title}
-      onPress={() => navigation.navigate('NewsDetailScreen', { 
-        title: item.title,
-        image: item.image, 
-        description: item.description, 
-        pubDate: item.pubDate, 
-        source_name: item.source_name,
-        article_id: item.article_id 
-      })}
+      onPress={() =>
+        navigation.navigate("NewsDetailScreen", {
+          title: item.title,
+          image: item.image,
+          description: item.description,
+          pubDate: item.pubDate,
+          source_name: item.source_name,
+          article_id: item.article_id,
+        })
+      }
     />
   );
 
   const renderCategoryItem = ({ item }) => (
-    <ButtonComponent 
-      category={item} 
-      isActive={item === activeCategory} 
-      onPress={() => setActiveCategory(item)} 
+    <ButtonComponent
+      category={item}
+      isActive={item === activeCategory}
+      onPress={() => setActiveCategory(item)}
     />
   );
 
   const ItemSeparator = () => <View style={globalStyles.separator} />;
 
-  useLayoutEffect(() => { 
+  useLayoutEffect(() => {
     navigation.setOptions({
-      title: activeCategory, 
+      title: activeCategory,
     });
   }, [navigation, activeCategory]);
 
@@ -62,15 +70,20 @@ const HomeScreen = ({ navigation }) => {
           value={searchText}
           onChangeText={(text) => setSearchText(text)}
           autoCorrect={false}
-          autoCapitalize='none'
+          autoCapitalize="none"
         />
-        <EvilIcons name="search" size={24} color={colors.avgGray} style={globalStyles.searchIcon} />
+        <EvilIcons
+          name="search"
+          size={24}
+          color={colors.avgGray}
+          style={globalStyles.searchIcon}
+        />
       </View>
 
       <FlatList
         data={categories}
         renderItem={renderCategoryItem}
-        keyExtractor={item => item}
+        keyExtractor={(item) => item}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
@@ -87,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
         <FlatList
           data={filteredNewsData}
           renderItem={renderItem}
-          keyExtractor={item => item.article_id || item.title}
+          keyExtractor={(item) => item.article_id || item.title}
           ItemSeparatorComponent={ItemSeparator}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={globalStyles.listContent}
