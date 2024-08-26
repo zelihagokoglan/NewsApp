@@ -1,16 +1,20 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import colors from './colors';
+import { Dimensions, StyleSheet } from "react-native";
+import colors from "./colors";
 
-
-const deviceWidth = Math.round(Dimensions.get('window').width);
-const deviceHeight = Math.round(Dimensions.get('window').height);
+const deviceWidth = Math.round(Dimensions.get("window").width);
+const deviceHeight = Math.round(Dimensions.get("window").height);
 const cardWidth = deviceWidth - 70;
 
 const layoutStyles = StyleSheet.create({
+  input: {
+    width: "100%",
+    marginVertical: 10,
+    backgroundColor: colors.white,
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 16,
     backgroundColor: colors.white,
   },
@@ -21,11 +25,11 @@ const layoutStyles = StyleSheet.create({
   separator: {
     height: 30,
     width: 30,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   searchInput: {
     flex: 1,
@@ -49,24 +53,24 @@ const textStyles = StyleSheet.create({
     fontSize: 16,
     color: colors.black,
     paddingHorizontal: 22,
-    alignSelf: 'center',
-    textAlign: 'left',
+    alignSelf: "center",
+    textAlign: "left",
   },
   sourceTimeText: {
     fontSize: 12,
     color: colors.black,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textAlign: 'left',
+    fontWeight: "bold",
+    alignSelf: "center",
+    textAlign: "left",
     paddingHorizontal: 22,
     paddingBottom: 6,
   },
   detailTitleText: {
     fontSize: 18,
     color: colors.black,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textAlign: 'center',
+    fontWeight: "bold",
+    alignSelf: "center",
+    textAlign: "center",
     paddingHorizontal: 22,
     paddingBottom: 10,
   },
@@ -83,7 +87,23 @@ const textStyles = StyleSheet.create({
   onBtext: {
     fontSize: 16,
     color: colors.black,
-    textAlign: 'center',
+    textAlign: "center",
+  },
+  orText: {
+    marginVertical: 15,
+    fontSize: 16,
+    color: colors.black,
+  },
+  orText: {
+    marginVertical: 15,
+    fontSize: 16,
+    color: colors.black,
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginVertical: 15,
+    color: colors.black,
   },
 });
 
@@ -91,8 +111,8 @@ const buttonStyles = StyleSheet.create({
   button: {
     backgroundColor: colors.black,
     borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderColor: colors.black,
     marginHorizontal: 10,
     width: 100,
@@ -100,13 +120,24 @@ const buttonStyles = StyleSheet.create({
   },
   buttonGradient: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: colors.black,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  signButton: {
+    height: 55,
+    width: deviceWidth - 150,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  toggleText: {
+    fontSize: 16,
+    color: colors.black,
+    marginTop: 20,
   },
 });
 
@@ -114,25 +145,25 @@ const cardStyles = StyleSheet.create({
   cardContainer: {
     width: cardWidth,
     height: 180,
-    overflow: 'hidden',
-    alignSelf: 'center',
+    overflow: "hidden",
+    alignSelf: "center",
     borderRadius: 12,
     padding: 0,
     margin: 0,
     borderWidth: 0,
-    shadowColor: 'transparent',
-    backgroundColor: 'transparent',
+    shadowColor: "transparent",
+    backgroundColor: "transparent",
   },
   cardImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: 12,
   },
   cardOverlay: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 });
 

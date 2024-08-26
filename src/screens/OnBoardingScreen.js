@@ -1,30 +1,30 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
-import Onboarding from 'react-native-onboarding-swiper';
-import globalStyles from '../styles/globalStyles';
-import { colors } from 'react-native-elements';
-
+import React from "react";
+import { View, Text, Image } from "react-native";
+import Onboarding from "react-native-onboarding-swiper";
+import globalStyles from "../styles/globalStyles";
+import { colors } from "react-native-elements";
 
 const OnboardingScreen = ({ navigation }) => {
-  
   return (
     <Onboarding
-      onSkip={() => navigation.replace('TabNavigator')}
-      onDone={() => navigation.replace('TabNavigator')}
+      onSkip={() => navigation.replace("SignScreen")}
+      onDone={() => navigation.replace("SignScreen")}
       pages={[
         {
           backgroundColor: colors.white,
           image: (
             <Image
-              source={require('../../assets/onbPage1.jpg')} 
+              source={require("../../assets/onbPage1.jpg")}
               style={globalStyles.onBiMage}
             />
           ),
-          title: '',
+          title: "",
           subtitle: (
             <View style={globalStyles.onBtextContainer}>
               <Text style={globalStyles.onBtext}>
-                Haberlerin en güncel ve güvenilir kaynağına hoş geldiniz! Gündemden spora, politikadan teknolojiye kadar tüm haberleri tek bir uygulamada takip edin.
+                Haberlerin en güncel ve güvenilir kaynağına hoş geldiniz!
+                Gündemden spora, politikadan teknolojiye kadar tüm haberleri tek
+                bir uygulamada takip edin.
               </Text>
             </View>
           ),
@@ -33,11 +33,11 @@ const OnboardingScreen = ({ navigation }) => {
           backgroundColor: colors.white,
           image: (
             <Image
-              source={require('../../assets/onbPage2.jpg')} 
+              source={require("../../assets/onbPage2.jpg")}
               style={globalStyles.onBiMage}
             />
           ),
-          title: '',
+          title: "",
           subtitle: (
             <View style={globalStyles.onBtextContainer}>
               <Text style={globalStyles.onBtext}>
@@ -53,6 +53,5 @@ const OnboardingScreen = ({ navigation }) => {
     />
   );
 };
-
 
 export default OnboardingScreen;
