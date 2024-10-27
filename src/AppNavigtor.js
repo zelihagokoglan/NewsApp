@@ -6,6 +6,8 @@ import TabNavigator from "./TabNavigator";
 import NewsDetailScreen from "./screens/NewsDetailScreen";
 import FavoritesContextProvider from "../store/FavoritesContext";
 import SignScreen from "./screens/SignScreen";
+import HomeScreen from "./screens/HomeScreen";
+
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -24,6 +26,11 @@ const AppNavigator = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
             options={{ headerShown: false }}
@@ -31,7 +38,7 @@ const AppNavigator = () => {
           <Stack.Screen
             name="NewsDetailScreen"
             component={NewsDetailScreen}
-            options={{ headerShown: true, title: "Detay" }}
+            options={{ headerShown: true, title: "Detail" }}
           />
         </Stack.Navigator>
       </FavoritesContextProvider>

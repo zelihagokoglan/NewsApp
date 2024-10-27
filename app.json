@@ -18,14 +18,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.zelihagokoglan.news"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
-    ]
-    
+      "expo-font",
+      "expo-localization"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3967d860-34ae-47e9-ac4f-388debc2457c"
+      }
+    },
+    "owner": "zelihagokoglan"
   }
 }

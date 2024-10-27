@@ -1,22 +1,97 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { colors } from "react-native-elements";
 import globalStyles from "../styles/globalStyles";
+import * as WebBrowser from "expo-web-browser";
+import { useOAuth } from "@clerk/clerk-expo";
+import * as Linking from "expo-linking";
+// import {
+//   schedulePushNotification,
+//   registerForPushNotificationsAsync,
+// } from "../utils/notifications";
 
-function SignScreen() {
+WebBrowser.maybeCompleteAuthSession();
+
+function SignScreen({ navigation }) {
   // States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignIn, setIsSignIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  //const [expoPushToken, setExpoPushToken] = useState("");
 
-  const handleGoogleSignIn = () => {};
+  useEffect(() => {
+    WebBrowser.warmUpAsync();
+    return () => {
+      WebBrowser.coolDownAsync();
+    };
+  }, []);
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync().then((token) => {
+  //     if (token) {
+  //       setExpoPushToken(token);
+  //     }
+  //   });
+  // }, []);
 
+  const googleOauth = useOAuth({ strategy: "oauth_google" });
+
+  async function onGoogleSignIn() {
+    try {
+      const redirectUrl = Linking.createURL("/");
+
+      setIsLoading(true);
+      const oAuthFlow = await googleOauth.startOAuthFlow({ redirectUrl });
+      if (oAuthFlow.authSessionResult?.type === "success") {
+        if (oAuthFlow.setActive) {
+          await oAuthFlow.setActive({ session: oAuthFlow.createdSessionId });
+        }
+
+        navigation.navigate("TabNavigator");
+      } else {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+  async function onGoogleSignUp() {
+    try {
+      const redirectUrl = Linking.createURL("/");
+
+      setIsLoading(true);
+      const oAuthFlow = await googleOauth.startOAuthFlow({ redirectUrl });
+      if (oAuthFlow.authSessionResult?.type === "success") {
+        if (oAuthFlow.setActive) {
+          await oAuthFlow.setActive({ session: oAuthFlow.createdSessionId });
+        }
+        navigation.navigate("TabNavigator");
+      } else {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+  const handleGoogleSignIn = () => {
+    if (!isLoading) {
+      onGoogleSignIn();
+    }
+  };
+  const handleGoogleSignUp = () => {
+    if (!isLoading) {
+      onGoogleSignUp();
+    }
+  };
   const handleEmailSignIn = () => {};
-
   const handleEmailSignUp = () => {};
 
-  const handleGoogleSignUp = () => {};
+  const toggleSignInSignUp = () => {
+    setIsSignIn(!isSignIn);
+  };
 
   return (
     <View style={globalStyles.container}>
@@ -25,7 +100,7 @@ function SignScreen() {
       </Text>
       <Text style={globalStyles.orText}>with</Text>
       {isSignIn ? (
-        <TouchableOpacity onPress={handleGoogleSignIn}>
+        <TouchableOpacity onPress={handleGoogleSignIn} disabled={isLoading}>
           <Button
             style={globalStyles.signButton}
             textColor={colors.black}
@@ -36,7 +111,7 @@ function SignScreen() {
           </Button>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={handleGoogleSignUp}>
+        <TouchableOpacity onPress={handleGoogleSignUp} disabled={isLoading}>
           <Button
             style={globalStyles.signButton}
             textColor={colors.black}
@@ -67,7 +142,7 @@ function SignScreen() {
       />
 
       {isSignIn ? (
-        <TouchableOpacity onPress={handleEmailSignIn}>
+        <TouchableOpacity onPress={handleEmailSignIn} disabled={isLoading}>
           <Button
             style={globalStyles.signButton}
             textColor={colors.white}
@@ -78,7 +153,7 @@ function SignScreen() {
           </Button>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={handleEmailSignUp}>
+        <TouchableOpacity onPress={handleEmailSignUp} disabled={isLoading}>
           <Button
             style={globalStyles.signButton}
             textColor={colors.white}
@@ -90,13 +165,23 @@ function SignScreen() {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity onPress={() => setIsSignIn(!isSignIn)}>
-        <Text style={globalStyles.toggleText}>
-          {isSignIn
-            ? "Don't have an account? Sign Up"
-            : "Already have an account? Sign In"}
-        </Text>
-      </TouchableOpacity>
+      <Text style={globalStyles.toggleText}>
+        {isSignIn ? (
+          <Text>
+            Don't have an account?{" "}
+            <TouchableOpacity onPress={toggleSignInSignUp}>
+              <Text style={{ color: colors.blue }}>Sign Up</Text>
+            </TouchableOpacity>
+          </Text>
+        ) : (
+          <Text>
+            Already have an account?{" "}
+            <TouchableOpacity onPress={toggleSignInSignUp}>
+              <Text style={{ color: colors.blue }}>Sign In</Text>
+            </TouchableOpacity>
+          </Text>
+        )}
+      </Text>
     </View>
   );
 }
